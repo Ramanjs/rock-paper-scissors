@@ -1,80 +1,90 @@
-function computerPlay() {
-    return Math.floor(Math.random()*3);
+let computerChoiceDiv = document.querySelector('#computer-choice');
+let playerChoiceDiv = document.querySelector('#player-choice');
+let computerScoreDiv = document.querySelector('#computer-score');
+let playerScoreDiv = document.querySelector('#player-score');
+let buttons = Array.from(document.querySelectorAll('.btn'));
+
+
+buttons.forEach(button => button.addEventListener('click', setPlayerSelection));
+
+function setPlayerSelection(e) {
+    let playerSelection = this.id;
+    playRound(playerSelection);
 }
 
-function playRound(playerSelection, computerSelection) {
-    if (computerSelection != playerSelection){
-        if (computerSelection === 0) {
-            if (playerSelection === 1) {
-                return 1;
+function getComputerSelection() {
+	let rps = ['rock', 'paper', 'scissors'];
+    return rps[getRandomNumberInRange(0, 2)];
+}
+
+function getRandomNumberInRange(a, b) {
+	return Math.floor(Math.random() * (b - a + 1));
+}
+
+function getResult(playerSelection, computerSelection) {
+    let result = '';
+    if (computerSelection !== playerSelection){
+        if (computerSelection === 'rock') {
+            if (playerSelection === 'scissors') {
+                result = 'loss';
+            } else {
+                result = 'win';
             }
-            return 0;
         }
-        else if (computerSelection === 1) {
-            if (playerSelection === 2) {
-                return 1;
+        else if (computerSelection === 'paper') {
+            if (playerSelection === 'rock') {
+                result = 'loss';
+            } else {
+                result = 'win';
             }
-            return 0;
         }
-        else {
-            if (playerSelection === 0) {
-                return 1;
+        else if (computerSelection === 'scissors') {
+            if (playerSelection === 'paper') {
+                result = 'loss';
+            } else {
+                result = 'win';
             }
-            return 0;
         }
+    } else {
+        result = 'draw';
     }
-    else
-        return 2;
+    return result;
 }
 
-function playerPlay(message) {
-    input = window.prompt(message + 'Rock, paper or scissors?');
-    input = input.toLowerCase();
-    if (input == 'rock'){
-        return 0;
-    }else if (input == 'paper') {
-        return 1;
+function updateChoice(choiceDiv, selection) {
+    if (choiceDiv.firstChild) {
+        choiceDiv.removeChild(choiceDiv.firstChild);
     }
-    else
-        return 2;
+
+    let icon = getIconElement(selection);
+    choiceDiv.appendChild(icon);
 }
 
-function playGame() {
-    words = ['rock', 'paper', 'scissors']
-    let playerScore = 0;
-    let computerScore = 0;
-    message = '';
-    for(let i = 0; i<5; i++){
-        playerSelection = playerPlay(message);
-        computerSelection = computerPlay();
-
-        result = playRound(playerSelection, computerSelection);
-    
-        if(result == 1) {
-            message = 'You won this round. ' + 
-                        words[playerSelection] + ' beats ' + words[computerSelection] + '\n';
-
-            playerScore++;
-        }else if(result == 0){
-            message = 'You lost this round. ' + 
-                        words[computerSelection] + ' beats ' + words[playerSelection] + '\n';
-            
-            computerScore++;
-        }
-        else {
-            message = 'Its a draw' + '\n';
-        }
-    }
-
-    if (playerScore > computerScore) {
-        window.prompt('Game over. Congrats you won');
-    }
-    else if (playerScore < computerScore) {
-        window.prompt('Game over. You lose')
-    }
-    else {
-        window.prompt('Game over. Its a draw')
+function updateScoreboard(result) {
+    if (result == 'win') {
+        let playerScore = parseInt(playerScoreDiv.innerText);
+        playerScore += 1;
+        playerScoreDiv.innerText = playerScore;
+    } else if (result == 'loss') {
+        let computerScore = parseInt(computerScoreDiv.innerText);
+        computerScore += 1;
+        computerScoreDiv.innerText = computerScore;
     }
 }
 
-// playGame();
+function getIconElement(selection) {
+    let icon = document.createElement('i');
+    let className = `fa-hand-${selection}-o`;
+    icon.classList.add('fa');
+    icon.classList.add(className);
+    return icon;
+}
+
+function playRound(playerSelection) {
+    let computerSelection = getComputerSelection();
+
+    result = getResult(playerSelection, computerSelection);
+    updateChoice(playerChoiceDiv, playerSelection);
+    updateChoice(computerChoiceDiv, computerSelection);
+    updateScoreboard(result);
+}
