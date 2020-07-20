@@ -1,88 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <!-- Font Awesome cdn -->
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>RPS</title>
 </head>
 <body>
-    <script>
-        function computerPlay() {
-            return Math.floor(Math.random()*3);
-        }
-
-        function playRound(playerSelection, computerSelection) {
-            if (computerSelection != playerSelection){
-                if (computerSelection === 0) {
-                    if (playerSelection === 1) {
-                        return 1;
-                    }
-                    return 0;
-                }
-                else if (computerSelection === 1) {
-                    if (playerSelection === 2) {
-                        return 1;
-                    }
-                    return 0;
-                }
-                else {
-                    if (playerSelection === 0) {
-                        return 1;
-                    }
-                    return 0;
-                }
-            }
-            else
-                return 2;
-        }
-
-        function playerPlay(message) {
-            input = window.prompt(message + 'Rock, paper or scissors?');
-            input = input.toLowerCase();
-            if (input == 'rock'){
-                return 0;
-            }else if (input == 'paper') {
-                return 1;
-            }
-            else
-                return 2;
-        }
-
-        function playGame() {
-            words = ['rock', 'paper', 'scissors']
-            let playerScore = 0;
-            let computerScore = 0;
-            message = '';
-            for(let i = 0; i<5; i++){
-                playerSelection = playerPlay(message);
-                computerSelection = computerPlay();
-
-                result = playRound(playerSelection, computerSelection);
-            
-                if(result == 1) {
-                    message = 'You won this round. ' + words[playerSelection] + ' beats ' + words[computerSelection] + '\n';
-
-                    playerScore++;
-                }else if(result == 0){
-                    message = 'You lost this round. ' + words[computerSelection] + ' beats ' + words[playerSelection] + '\n';
+    <div id="container">
+        <div id="computer">
+            <h2>Computer</h2>
+        </div>
+        <div id="play-ground">
+            <div id="fight-area">
+                <div id="computer-choice" class="circle">
+                </div>
+                <div id="player-choice" class="circle">
                     
-                    computerScore++;
-                }
-                else {
-                    message = 'Its a draw' + '\n';
-                }
-            }
-
-            if (playerScore > computerScore) {
-                window.prompt('Game over. Congrats you won');
-            }
-            else if (playerScore < computerScore) {
-                window.prompt('Game over. You lose')
-            }
-            else {
-                window.prompt('Game over. Its a draw')
-            }
-        }
-
-        playGame();
-    </script>
+                </div>
+            </div>
+            <div id="score-board">
+            </div>
+        </div>
+        <div id="player">
+            <div id="button-palette"> 
+                <button id="rock" class="btn circle"><i class="fa fa-hand-rock-o"></i></button>
+                <button id="paper" class="btn circle"><i class="fa fa-hand-paper-o"></i></button>
+                <button id="scissors" class="btn circle"><i class="fa fa-hand-scissors-o"></i></button>
+            </div>
+            <h2>You</h2>
+        </div>
+    </div>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
