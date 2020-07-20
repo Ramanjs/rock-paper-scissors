@@ -1,0 +1,34 @@
+#container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#play-ground {
+	width: 40%;
+	display: flex;
+	justify-content: center;
+}
+
+#fight-area {
+	display: flex;
+	flex-direction: column;
+}
+
+#score-board {
+	display: flex;
+	flex-direction: column;
+}
+
+#player {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.circle {
+	width: 60px;
+	height: 60px;
+	border: solid;
+	border-radius: 50%;
+}
