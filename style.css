@@ -1,3 +1,9 @@
+body {
+	background-color: #080708;
+	color: #CE7DA5;
+	font-family: 'Lato', Arial, sans-serif;
+}
+
 #container {
 	width: 100%;
 	display: flex;
@@ -14,11 +20,34 @@
 #fight-area {
 	display: flex;
 	flex-direction: column;
+	padding: 10px 20px;
+	border-style: solid;
+	border-color: #FFC857;
+	margin-bottom: 20px;
+	background-color: #4697A2;
+}
+
+.choice {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px;
+	background-color: #080708;
 }
 
 #score-board {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	border-style: solid;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	border-color: #FFC857;
+	color: #FFC857;
+	background-color: #4697A2;
+	font-size: 20px;
+	padding: 10px;
 }
 
 #player {
@@ -31,4 +60,30 @@
 	height: 60px;
 	border: solid;
 	border-radius: 50%;
+	border-color: #FFC857;
+}
+
+.btn {
+	background-color: #FFC857;
+	border-color: #4697A2;
+}
+
+.btn:hover {
+	cursor: pointer;
+}
+
+.btn:focus {
+	outline: none;
+}
+
+#new-game {
+	margin: 20px;
+	background: linear-gradient(35deg, #CCFFFF, #FFCCCC);
+	border-color: #CE7DA5;
+	color: #CE7DA5;
+	visibility: hidden;
+}
+
+#new-game:hover {
+	cursor: pointer;
 }

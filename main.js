@@ -2,6 +2,8 @@ let computerChoiceDiv = document.querySelector('#computer-choice');
 let playerChoiceDiv = document.querySelector('#player-choice');
 let computerScoreDiv = document.querySelector('#computer-score');
 let playerScoreDiv = document.querySelector('#player-score');
+let messageBox = document.querySelector('#message-box');
+let newGameButton = document.querySelector('#new-game');
 let buttons = Array.from(document.querySelectorAll('.btn'));
 
 
@@ -77,6 +79,7 @@ function getIconElement(selection) {
     let className = `fa-hand-${selection}-o`;
     icon.classList.add('fa');
     icon.classList.add(className);
+    icon.classList.add('fa-2x');
     return icon;
 }
 
@@ -87,4 +90,74 @@ function playRound(playerSelection) {
     updateChoice(playerChoiceDiv, playerSelection);
     updateChoice(computerChoiceDiv, computerSelection);
     updateScoreboard(result);
+
+    if (checkForGameOver()) {
+        let winner = getWinner();
+        displayMessage(winner);
+        deactivateButtons();
+        activateNewGameButton();
+    }
+}
+
+function checkForGameOver() {
+	let isGameOver = false;
+
+	let playerScore = parseInt(playerScoreDiv.innerText);
+	let computerScore = parseInt(computerScoreDiv.innerText);
+
+	if (playerScore == 5 || computerScore == 5) {
+		isGameOver = true;
+	}
+	return isGameOver;
+}
+
+function getWinner() {
+	let playerScore = parseInt(playerScoreDiv.innerText);
+	let computerScore = parseInt(computerScoreDiv.innerText);
+    let winner = 'computer';
+    if (playerScore > computerScore) {
+        winner = 'player';
+    }
+    return winner;
+}
+
+function displayMessage(winner) {
+    if (winner == 'player') {
+        messageBox.innerText = 'Congrats! You won the game.';
+    } else {
+        messageBox.innerText = 'You lost! hahahaha';
+    }
+}
+
+function deactivateButtons() {
+    buttons.forEach(button => button.removeEventListener('click', setPlayerSelection));
+}
+
+function activateNewGameButton() {
+    newGameButton.style.visibility = 'visible';
+
+    newGameButton.addEventListener('click', resetGame);
+}
+
+function resetGame() {
+    resetScoreboard();
+    activateButtons();
+    newGameButton.style.visibility = 'hidden';
+    newGameButton.removeEventListener('click', resetGame);
+    updateChoice(playerChoiceDiv, '');
+    updateChoice(computerChoiceDiv, '');
+    resetMessage();
+}
+
+function resetScoreboard() {
+    playerScoreDiv.innerText = '0';
+    computerScoreDiv.innerText = '0';
+}
+
+function activateButtons() {
+    buttons.forEach(button => button.addEventListener('click', setPlayerSelection));
+}
+
+function resetMessage() {
+    messageBox.innerText = 'First to reach 5 points wins!';
 }

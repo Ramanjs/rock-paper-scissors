@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Font Awesome cdn -->
+    <!-- Font Awesome link -->
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>RPS</title>
 </head>
@@ -15,27 +16,26 @@
         </div>
         <div id="play-ground">
             <div id="fight-area">
-                <div id="computer-choice" class="circle">
-                </div>
-                <div id="player-choice" class="circle">
-                    
-                </div>
+                <div id="computer-choice" class="choice circle"></div>
+                <div id="player-choice" class="choice circle"></div>
             </div>
             <div id="score-board">
-                <div id="score">Score</div>
-                <div id="computer-score">0</div>
-                <div id="divider">--</div>
-                <div id="player-score">0</div>
+                <div id="score"><b>Score</b></div>
+                <div id="computer-score"><b>0</b></div>
+                <div id="divider"><b>--</b></div>
+                <div id="player-score"><b>0</b></div>
             </div>
         </div>
+        <div id="message-box">First to reach 5 points wins!</div>
         <div id="player">
-            <div id="button-palette"> 
-                <button id="rock" class="btn circle"><i class="fa fa-hand-rock-o"></i></button>
-                <button id="paper" class="btn circle"><i class="fa fa-hand-paper-o"></i></button>
-                <button id="scissors" class="btn circle"><i class="fa fa-hand-scissors-o"></i></button>
-            </div>
             <h2>You</h2>
+            <div id="button-palette"> 
+                <button id="rock" class="btn circle"><i class="fa fa-hand-rock-o fa-2x"></i></button>
+                <button id="paper" class="btn circle"><i class="fa fa-hand-paper-o fa-2x"></i></button>
+                <button id="scissors" class="btn circle"><i class="fa fa-hand-scissors-o fa-2x"></i></button>
+            </div>
         </div>
+        <button id="new-game" class="circle">New Game</button>
     </div>
     <script type="text/javascript" src="main.js"></script>
 </body>
