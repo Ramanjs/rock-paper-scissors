@@ -1,15 +1,15 @@
-let computerChoiceDiv = document.querySelector('#computer-choice');
-let playerChoiceDiv = document.querySelector('#player-choice');
-let computerScoreDiv = document.querySelector('#computer-score');
-let playerScoreDiv = document.querySelector('#player-score');
-let messageBox = document.querySelector('#message-box');
-let newGameButton = document.querySelector('#new-game');
-let buttons = Array.from(document.querySelectorAll('.btn'));
+const computerChoiceDiv = document.querySelector('#computer-choice');
+const playerChoiceDiv = document.querySelector('#player-choice');
+const computerScoreDiv = document.querySelector('#computer-score');
+const playerScoreDiv = document.querySelector('#player-score');
+const messageBox = document.querySelector('#message-box');
+const newGameButton = document.querySelector('#new-game');
+const buttons = Array.from(document.querySelectorAll('.btn'));
 
 
 buttons.forEach(button => button.addEventListener('click', setPlayerSelection));
 
-function setPlayerSelection(e) {
+function setPlayerSelection() {
     let playerSelection = this.id;
     playRound(playerSelection);
 }
@@ -63,11 +63,11 @@ function updateChoice(choiceDiv, selection) {
 }
 
 function updateScoreboard(result) {
-    if (result == 'win') {
+    if (result === 'win') {
         let playerScore = parseInt(playerScoreDiv.innerText);
         playerScore += 1;
         playerScoreDiv.innerText = playerScore;
-    } else if (result == 'loss') {
+    } else if (result === 'loss') {
         let computerScore = parseInt(computerScoreDiv.innerText);
         computerScore += 1;
         computerScoreDiv.innerText = computerScore;
@@ -105,7 +105,7 @@ function checkForGameOver() {
 	let playerScore = parseInt(playerScoreDiv.innerText);
 	let computerScore = parseInt(computerScoreDiv.innerText);
 
-	if (playerScore == 5 || computerScore == 5) {
+	if (playerScore === 5 || computerScore === 5) {
 		isGameOver = true;
 	}
 	return isGameOver;
@@ -122,7 +122,7 @@ function getWinner() {
 }
 
 function displayMessage(winner) {
-    if (winner == 'player') {
+    if (winner === 'player') {
         messageBox.innerText = 'Congrats! You won the game.';
     } else {
         messageBox.innerText = 'You lost! hahahaha';
@@ -142,10 +142,8 @@ function activateNewGameButton() {
 function resetGame() {
     resetScoreboard();
     activateButtons();
-    newGameButton.style.visibility = 'hidden';
-    newGameButton.removeEventListener('click', resetGame);
-    updateChoice(playerChoiceDiv, '');
-    updateChoice(computerChoiceDiv, '');
+    deactivateNewGameButton();
+    resetFightArea();
     resetMessage();
 }
 
@@ -160,4 +158,14 @@ function activateButtons() {
 
 function resetMessage() {
     messageBox.innerText = 'First to reach 5 points wins!';
+}
+
+function deactivateNewGameButton() {
+    newGameButton.style.visibility = 'hidden';
+    newGameButton.removeEventListener('click', resetGame);
+}
+
+function resetFightArea() {
+    updateChoice(playerChoiceDiv, '');
+    updateChoice(computerChoiceDiv, '');
 }
