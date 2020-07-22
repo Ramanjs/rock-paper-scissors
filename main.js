@@ -125,7 +125,7 @@ function displayMessage(winner) {
     if (winner === 'player') {
         messageBox.innerText = 'Congrats! You won the game.';
     } else {
-        messageBox.innerText = 'You lost! hahahaha';
+        messageBox.innerText = 'You lost! Better luck next time.';
     }
 }
 
