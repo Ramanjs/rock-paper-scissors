@@ -66,6 +66,7 @@ body {
 .btn {
 	background-color: #FFC857;
 	border-color: #4697A2;
+	margin: 5px;
 }
 
 .btn:hover {
@@ -78,9 +79,13 @@ body {
 
 #new-game {
 	margin: 20px;
-	background: linear-gradient(35deg, #CCFFFF, #FFCCCC);
+	padding: 10px;
+	/* background: linear-gradient(35deg, #CCFFFF, #FFCCCC); */
 	border-color: #CE7DA5;
 	color: #CE7DA5;
+	border-radius: 10px;
+	background-color: #080708;
+	font-family: 'Lato', Arial, Helvetica, sans-serif;
 	visibility: hidden;
 }
 
